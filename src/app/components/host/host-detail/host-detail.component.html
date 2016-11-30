@@ -1,0 +1,14 @@
+HOST DETAIL WORKING
+<button class="btn btn-alert"  [routerLink]="['../']">Go Back</button>
+<div class="row">
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>{{selectedHost?.title}}</h1>
+  </div>
+  <div class="col-xs-12">
+    <button class="btn btn-success">To Shopping List</button>
+    <button class="btn btn-primary" (click)="onEdit()">Edit</button>
+    <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+  </div>
+</div>

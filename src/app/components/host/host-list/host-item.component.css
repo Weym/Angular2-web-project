@@ -1,0 +1,43 @@
+.bs-example {
+	margin-right: 0;
+    margin-left: 0;
+    background-color: #fff;
+    border-color: #e5e5e5 #eee #eee;
+    border-width: 1px;
+    border-radius: 4px 4px 0 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    position: relative;
+    padding: 25px 15px 15px;
+    margin: 0 -15px 15px;
+    border-style: solid;
+}
+
+.test {
+	height: 100%;
+	width: 100%;
+	display: inline-block;
+}
+
+.test p {
+	float: left;
+}
+
+.outer {
+    height: 100%;
+    width: 100%;
+}
+
+.btn-group {
+	padding-top: 4px;
+    display: table;
+    margin: 0 auto;
+}
+
+img {
+	height: 150px;
+}
+
+.btn-info {
+    border-color: #46B8B6;
+}

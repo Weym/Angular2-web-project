@@ -1,0 +1,23 @@
+.btn-profile {
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+.container {
+	background-color: #ecf0f1;
+	width: 100%;
+}
+
+.images {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.images input {
+    margin-bottom: 10px;
+    margin-top: 9px;
+}
+
+.images button {
+    margin-top: 31px;
+}

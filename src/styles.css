@@ -1,0 +1,477 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/* ------------------------------------ */
+/* FIXES */
+/* ------------------------------------ */
+
+.normalizenavbar {
+  background-color: #2980b9;
+  margin-top: -60px;
+  padding-top: 60px;
+  z-index: -5;
+}
+
+/* ------------------------------------ */
+/* NAV */
+/* ------------------------------------ */
+
+.navbar {
+  background-color: transparent;
+  border: none;
+  margin-bottom: 0;
+  padding-top: 5px;
+}
+
+
+.navbar-brand,
+.navbar-brand strong,
+.navbar-brand span {
+  font-family: arvo;
+  font-size: 32px;
+  color: #fefefe;
+}
+
+.navbar-brand {
+  color: white;
+  padding-top: 20px;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+  color: #e0e0e0;
+  text-transform: uppercase;
+  padding-top: 25px;
+  padding-bottom: 10px;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+  color: #f7f7f7;
+  transition: 0.2s;
+}
+
+ul.nav, .jumbotron h1 {
+    font-family: 'Arvo', courier, serif;
+}
+
+.navbar-default ul.nav {
+    font-size: 16px;
+    font-weight: 100;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+  background-color: #337AA6;
+  margin-top: -5px;
+  padding-bottom: 15px;
+}
+
+
+/* ------------------------------------ */
+/* HEADER */
+/* ------------------------------------ */
+
+
+.jumbotron {
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  background-color: #2980b9;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/app/resources/img/digital%20nomad2.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: #fff;
+  margin-top: -65px;
+  padding-top: 100px;
+  padding-bottom: 80px;
+  margin-bottom: 0;
+}
+
+.jumbotron h1 {
+  padding: 10px;
+  text-align: center;
+  margin: 70px 20px;
+  font-weight: 600;
+  font-size: 50px;
+  text-shadow: 1px 1px 2px #333;
+  margin-bottom: 30px;
+}
+
+.jumbotron p {
+  margin-bottom: 50px;
+  font-weight: 100;
+  padding: 0 50px;
+  opacity: .9;
+}
+
+.jumbotron .form-control{
+    height: 45px;
+    font-size: 18px;
+}
+
+.btn-know-more {
+  margin: 30px;
+  background-color: rgba(255, 255, 255, 0.25);
+  border: 0px;
+  color: white;
+    font-size: 20px;
+    padding: 15px 35px;
+}
+
+#search {
+    width: 553px;
+    margin: 20px auto;
+}
+
+#search input {
+    text-align: center;
+}
+
+
+/* ------------------------------------ */
+/* SECTIONS RESET */
+/* ------------------------------------ */
+
+
+.section-reset {
+    text-align: center;
+    padding-bottom: 50px;
+    padding-top: 80px;
+    color: #555;
+    font-weight: 100;
+    opacity: .9;
+}
+
+.section-reset h2, h3 {
+    font-family: 'Arvo', courier, serif;
+    text-transform: uppercase;
+}
+
+.section-reset h2 {
+    font-size: 36px;
+}
+
+.section-reset h3 {
+    font-size: 26px;
+}
+
+.section-reset p {
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.section-reset hr {
+    width: 140px;
+    margin-top: 15px;
+    border-top: 1px solid #999;
+}
+
+
+/* ------------------------------------ */
+/* EXPLORE */
+/* ------------------------------------ */
+
+
+#explore {
+  background: #ecf0f1;
+}
+
+
+/* ------------------------------------ */
+/* SHOWCASE */
+/* ------------------------------------ */
+  
+
+#showcase .row .col-xs-3 {
+  padding: 0;
+}
+
+#showcase .container {
+  width: 100%;
+}
+
+.explore-photo {
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+}
+
+.explore-photo img {
+    opacity: 0.7;
+    width: 100%;
+    height: auto;
+    transform: scale(1.15);
+    transition: transform 0.6s, opacity 0.5s;
+}
+
+.explore-photo img:hover {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+/* ------------------------------------ */
+/* HOW IT WORKS */
+/* ------------------------------------ */
+
+
+#how-it-works {
+  background: #d35400;
+}
+
+.how-it-works {
+}
+
+.how-it-works hr {
+  border-top: 1px solid #eee;
+}
+
+.how-it-works i {
+  font-size: 72px;
+  padding: 40px;
+}
+
+.how-it-works h3 {
+  margin: 10px 0;
+}
+
+.how-it-works {
+  color: #eee;
+  opacity: 1;
+}
+
+.how-it-works p {
+  font-size: 15px;
+  font-weight: 100;
+  padding-bottom: 10px;
+}
+
+#how-it-works>div>div>.col-md-4 {
+  margin-bottom: 20px;
+  background-color: rgba(230, 147, 34, 0.17);
+  box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+}
+
+
+/* ------------------------------------ */
+/* FOOTER */
+/* ------------------------------------ */
+
+
+footer {
+  background-color: #333;
+  padding-bottom: 30px;
+  position: relative;
+  width: 100%;
+  height: 200px;
+  color: #888; 
+  font-size: 16px; 
+}
+
+footer .container {
+  position: relative;
+  top: 40px;
+}
+
+#copyright {
+  text-align: center;
+  top: 45px;
+  font-size: 14px;
+}
+
+
+footer .nav a { 
+  color: #888;  
+  font-weight: 100;
+}
+
+footer .nav a:hover {
+  background-color: #333;
+  color: #aaa;
+  transition: 0.5s;
+}
+
+footer .nav a:focus {
+  background-color: #333;
+}
+
+.social {
+  list-style: none;
+  float: right;
+  padding-top: 10px;
+  font-size: 26px;
+  display: inline-block;
+}
+
+.social li {
+  display: inline-block;
+  margin-right: 25px;
+}
+
+.social a {
+  color: #888;
+}
+
+.fa-facebook:hover {
+  color: #3b5999;
+}
+
+.fa-instagram:hover {
+  color: #e4405f;
+}
+
+.fa-twitter:hover {
+  color: #55acee;
+}
+
+.fa-facebook,
+.fa-instagram,
+.fa-twitter {
+  transition: 0.3s;
+}
+
+
+
+/* ------------------------------------ */
+/* MODAL FORM */
+/* ------------------------------------ */
+
+.modal-dialog {
+    position: absolute;
+    left: 50%;
+    margin-left: -300px;
+    top: 50%;
+    margin-top: -173px;
+}
+
+.modal-content iframe {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.modal-content button.close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #fff;
+    font-size: 28px;
+    width: 30px;
+    opacity: 1;
+    border-radius: 24px;
+    -webkit-border-radius: 24px;
+    -maz-border-radius: 24px;
+}
+
+
+/* ------------------------------------ */
+/* RESPONSIVE STYLING */
+/* ------------------------------------ */
+
+@media (max-width: 1199px) {
+    .container {
+      background-size: cover;
+      background-position: top;
+    }
+  
+    .container h1 {
+      font-size: 48px;
+    }
+}
+
+@media (max-width: 991px) {
+    body { font-size: 18px; }
+  
+    #search {
+        width: 400px;
+    }
+  
+    .container h1 {
+        font-size: 44px;
+    }
+  
+    .container .btn-lg {
+      font-size: 18px;
+    }
+  
+    .section h2 {
+      font-size: 32px;
+    }
+  
+    .how-it-works h3 {
+      font-size: 24px;
+    }
+  
+    .how-it-works p {
+      padding-bottom: 30px;
+      padding-top: 5px;
+    }
+  
+    .section p {
+        font-size: 18px;
+        font-weight: 300;
+    }
+}
+
+@media (max-width: 767px) {
+    .jumbotron {
+      background-position: center;   
+    }
+  
+    .jumbotron {
+      margin-top: -241px;
+      padding-top: 250px;
+      height: 130vh;
+    }
+    
+    .jumbotron p {
+        font-size: 16px;
+        padding: 0;
+        margin-bottom: 60px;
+    }
+  
+    #search {
+        width: 320px;
+    }
+  
+    .container h1 {
+        font-size: 36px;
+        margin-top: 80px;
+    }
+    
+    .btn-lg {
+        font-family: 18px;
+    }
+    
+    .section h2{
+      font-size: 30px;
+    }
+  
+    .how-it-works h3 {
+      font-size: 22px;
+      margin: 5px 0;
+    }
+  
+    .section hr{
+      width: 130px;
+    }
+  
+    .section p {
+      font-size: 16px;
+      font-weight: 300;
+    }
+  
+    footer img {
+      width: 330px;
+    }
+  
+    footer {
+      font-size: 14px;
+      padding-bottom: 235px;
+    }
+  
+    #copyright {
+      text-align: center;
+      top: 15px; 
+    }
+}

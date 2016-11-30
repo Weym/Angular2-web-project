@@ -1,0 +1,23 @@
+		<div class=bs-example data-example-id=media-alignment>
+			<div class=media>
+				<div class="media-left media-middle">
+					<a [routerLink]=[hostId]> 
+						<img alt="Generic placeholder image" src="{{host.featuredImage}}" class=media-object>
+					</a>
+					<div class="outer">
+						<div class="btn-group" role="group">
+						  <button type="button" class="btn btn-info">More</button>
+						  <button type="button" class="btn btn-success">Contact</button>
+						</div>
+					</div>
+				</div>
+				<div class=media-body>
+					<a [routerLink]=[hostId]> <h4 class=media-heading>{{host.title | capitalizeFirstLetter}}<span class="label label-success">{{host.country}}</span></h4>
+					<p>{{host.placeDescription | capitalizeFirstLetter | textMaxLength}}</p></a>
+					<div class="test">
+						<p>Member Since: {{host.created_at}}</p>
+					</div>
+					
+				</div>
+			</div>
+		</div>

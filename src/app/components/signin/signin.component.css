@@ -1,0 +1,21 @@
+form {
+    width: 350px;
+    margin: 55px auto 70px auto;
+    padding: 25px;
+    border: solid 1px #ddd;
+    border-radius: 6px;
+}
+
+h3 {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.form-group {
+	text-align: center;
+}
+
+button {
+    margin-top: 25px;
+    height: 45px;
+}
