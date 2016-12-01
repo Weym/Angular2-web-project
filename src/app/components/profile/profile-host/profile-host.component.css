@@ -1,0 +1,55 @@
+.btn-profile {
+    margin-left: 20px;
+}
+
+.container {
+	background-color: #ecf0f1;
+	width: 100%;
+}
+
+.images .input-group {
+    margin-bottom: 11px;
+    margin-top: 5px;
+}
+
+.images button {
+    margin-top: 31px;
+}
+
+.img {
+    height: 100px;
+    margin-top: -48px;
+    border-radius: 2px;
+    margin-left: -1px;
+}
+
+.div-img-btn {
+    padding: 0;
+    padding-left: 5px;
+    margin-top: 10px;
+}
+
+.img-btn {
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-left: 214px;
+}
+
+.images-img {
+    margin-left: -14px;
+}
+
+.images-img img {
+    margin-left: 4px;
+    height: 100px;
+    margin-top: -7px;
+    margin-bottom: 17px;
+}
+
+.add-image {
+    margin-top: -15px;
+}
+
+.submit-btn {
+	margin-top: 32px;
+}

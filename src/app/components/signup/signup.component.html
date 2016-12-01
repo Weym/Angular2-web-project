@@ -1,5 +1,9 @@
 <div class="normalizenavbar"></div>
 <h3>Please sign up to use all features</h3>
+
+
+
+
 <form [formGroup]="myForm" (ngSubmit)="onSignup()">
   <div class="form-group" [ngClass]="{'has-error':!myForm.controls['email'].valid && myForm.controls['email'].touched}">
     <label for="email">E-Mail</label>
@@ -7,6 +11,18 @@
     <span *ngIf="!email.pristine && email.errors != null && email.errors['noEmail']">Invalid mail address</span>
   </div>
     <div *ngIf="myForm.controls['email'].hasError('noEmail') && myForm.controls['email'].touched" class="alert alert-danger">Enter a valid email address</div>
+
+
+      <div class="form-group" [ngClass]="{'has-error':!myForm.controls['userType'].valid && myForm.controls['userType'].touched}">
+        <label for="name">User Type</label>
+          <select name="userType" id="userType" class="form-control" formControlName="userType" required>
+            <option value="">-</option>
+            <option value="User">User</option>
+            <option value="Host">Host</option>
+          </select>
+    <div *ngIf="myForm.controls['userType'].hasError('required') && myForm.controls['userType'].touched" class="alert alert-danger">Select one type of User.</div>
+      </div>
+
 
 
   <div class="form-group" [ngClass]="{'has-error':!myForm.controls['password'].valid && myForm.controls['password'].touched}">

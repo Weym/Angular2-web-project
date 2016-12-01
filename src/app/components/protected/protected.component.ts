@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { User } from "../../models/user.interface";
+import { UserAuth } from "../../models/userAuth.interface";
 import { AuthService } from "../../services/auth.service";
 
 
@@ -13,7 +13,7 @@ declare var firebase: any;
     `
 })
 export class ProtectedComponent {
-  user: User;
+  user: UserAuth;
 
 
   constructor(private authService: AuthService) {}

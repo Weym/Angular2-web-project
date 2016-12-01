@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-import { User } from "../models/user.interface";
+import { UserAuth } from "../models/userAuth.interface";
 import { Router } from "@angular/router";
 
 declare var firebase: any;
@@ -9,25 +9,29 @@ declare var firebase: any;
 export class AuthService {
   constructor(private router: Router) {}
 
-  signupUser(user: User) {
+  signupHost(user: UserAuth) {
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
       .then((userInfo) => {
-        // You are now logged in
-        // Maybe redirect to the first logged in page
-        console.log("logged in");
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/profile-host']);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  signinUser(user: User) {
+  signupUser(user: UserAuth) {
+    firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+      .then((userInfo) => {
+        this.router.navigate(['/profile-user']);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  signinUser(user: UserAuth) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
       .then((userInfo) => {
-        // You are now logged in
-        // Maybe redirect to the first logged in page
-        console.log("logged in");
         this.router.navigate(['/home']);
       })
       .catch(function (error) {
@@ -43,7 +47,7 @@ export class AuthService {
 
   isAuthenticated() {
     var user = firebase.auth().currentUser;
-  if (user != null) {
+    if (user != null) {
       return true;
     } else {
       return false;

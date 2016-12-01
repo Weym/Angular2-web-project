@@ -16,7 +16,12 @@ export class SignupComponent implements OnInit {
   constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   onSignup() {
-    this.authService.signupUser(this.myForm.value);
+
+    if (this.myForm.value.userType == "Host"){
+      this.authService.signupHost(this.myForm.value);
+    } else {
+      this.authService.signupUser(this.myForm.value);
+    }
   }
 
   ngOnInit(): any {
@@ -25,6 +30,7 @@ export class SignupComponent implements OnInit {
         Validators.required,
         this.isEmail
       ])],
+      'userType': ['', Validators.required],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       'confirmPassword': ['', Validators.compose([
         Validators.required,
@@ -32,6 +38,10 @@ export class SignupComponent implements OnInit {
         Validators.minLength(6)
       ])],
     });
+
+      this.myForm.statusChanges.subscribe(
+        (data: any) => console.log(this.myForm.value)
+        );
   }
 
   isEmail(control: FormControl): {[s: string]: boolean} {

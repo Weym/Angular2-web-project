@@ -3,6 +3,8 @@ import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { NgModule }      from '@angular/core';
+import { AgmCoreModule } from 'angular2-google-maps/core';
+
 
 import { AppComponent }   from './app.component';
 import { SigninComponent } from './components/signin/signin.component';
@@ -29,6 +31,9 @@ import { DataFilterPipe } from './pipes/data-filter.pipe';
 import { DataTableModule } from "angular2-datatable";
 import { HostList2Component } from './components/host/host-list2/host-list2.component';
 import { HostItem2Component } from './components/host/host-list2/host-item2.component';
+import { ProfileUserComponent } from './components/profile/profile-user/profile-user.component';
+import { ProfileHostComponent } from './components/profile/profile-host/profile-host.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 //Must export the config
 export const firebaseConfig = {
@@ -59,7 +64,10 @@ export const firebaseConfig = {
         TextMaxLengthPipe,
         DataFilterPipe,
         HostList2Component,
-        HostItem2Component
+        HostItem2Component,
+        ProfileUserComponent,
+        ProfileHostComponent,
+        FilterPipe
     ],
     imports: [
       BrowserModule,
@@ -69,7 +77,10 @@ export const firebaseConfig = {
       ReactiveFormsModule,
       AngularFireModule.initializeApp(firebaseConfig),
       Ng2PaginationModule,
-      DataTableModule
+      DataTableModule,
+      AgmCoreModule.forRoot({
+        apiKey: 'AIzaSyD7yambxE9YWzjDNlPm6dmy3Z9lon33Uxc'
+      })
     ],
     providers: [
         AuthGuard,

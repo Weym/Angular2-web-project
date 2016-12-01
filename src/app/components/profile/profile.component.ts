@@ -4,17 +4,19 @@ import { Component, trigger,
     animate,
     transition } from '@angular/core';
 import { Host } from "../../models/host.interface";
+import { User } from "../../models/user";
 import { FirebaseService } from "../../services/firebase.service";
 import { ActivatedRoute } from "@angular/router";
 import {
-	FormGroup,
-	FormBuilder,
-  	FormControl,
-  	FormArray,
-	Validators
+  FormGroup,
+  FormBuilder,
+    FormControl,
+    FormArray,
+  Validators
 } from '@angular/forms';
 import { Image } from "../../models/image.interface";
 import { Subscription } from "rxjs/Rx";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -41,8 +43,12 @@ import { Subscription } from "rxjs/Rx";
     ]
 })
 export class ProfileComponent {
+  profile:any;
   animation: boolean = true;
+  user:User;
+  users:User[];
   host:Host;
+  hosts:Host[];
   newHost:Host;
   complexForm: FormGroup;
   appState: string = "default";
@@ -55,26 +61,31 @@ export class ProfileComponent {
   activeImages:Image[];
   private subscription: Subscription;
   private isNew = true;
-  user = firebase.auth().currentUser;
+  userAuth = firebase.auth().currentUser;
+  data: any;
 
   constructor(private route: ActivatedRoute, private _firebaseService: FirebaseService,
-  	private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder, private router: Router) {
 
 
-    this.getProfile();
+    this._firebaseService.getProfile("hosts").subscribe(hosts => {
+      this.hosts = hosts;
+    });
 
-    if (!this.host) {
-    	this.createHost();
-    	this.getProfile();
-    }
-    	this.initForm();
+    this._firebaseService.getProfile("users").subscribe(users => {
+      this.users = users;
+    });
 
+      console.log(this.hosts);
+      console.log(this.users);
+/*
+      if (!this.host) {
+        this.createHost();
+        this.getProfile();
+      }
+        this.initForm();
+*/
     
-
-	console.log("This.host");
-	console.log("------------------------------------------------")
-	console.log(this.host);
-	console.log("------------------------------------------------")
 
   }
 
@@ -92,35 +103,35 @@ export class ProfileComponent {
         }
       }
 
-  	this.complexForm = this.formBuilder.group({
+    this.complexForm = this.formBuilder.group({
       'title' : [this.host.title, Validators.required],
-		  'country': ['', Validators.required],
-		  'city': ['', Validators.required],
-		  'state': ['', Validators.required],
-    	'featuredImage': ['', Validators.required],
-    	'placeDescription': ['', Validators.compose([Validators.required, Validators.minLength(150)])], 
-    	'benefits': [''],
-    	'accommodation': ['', Validators.required],
-    	'languages': [''],
-    	'skillsNeeded': [''],
-		'expectedFromVolunteers': ['', Validators.compose([Validators.required, Validators.minLength(150)])],
+      'country': ['', Validators.required],
+      'city': ['', Validators.required],
+      'state': ['', Validators.required],
+      'featuredImage': ['', Validators.required],
+      'placeDescription': ['', Validators.compose([Validators.required, Validators.minLength(150)])], 
+      'benefits': [''],
+      'accommodation': ['', Validators.required],
+      'languages': [''],
+      'skillsNeeded': [''],
+    'expectedFromVolunteers': ['', Validators.compose([Validators.required, Validators.minLength(150)])],
         meats: this.formBuilder.group({
           meatHam: this.formBuilder.control(null),
           meatTurkey: this.formBuilder.control(null),
           meatRoastBeef: this.formBuilder.control(null)
         }),
-      	images: imagesDisplay
+        images: imagesDisplay
 
-  	})
-	    console.log(this.complexForm);
-	    this.complexForm.valueChanges.subscribe( (form: any) => {
-	      console.log('form changed to:', form);
-	    }
-	    );
-    	
-    	this.complexForm.statusChanges.subscribe(
-    		(data: any) => console.log(this.complexForm.value)
-    		);
+    })
+      console.log(this.complexForm);
+      this.complexForm.valueChanges.subscribe( (form: any) => {
+        console.log('form changed to:', form);
+      }
+      );
+      
+      this.complexForm.statusChanges.subscribe(
+        (data: any) => console.log(this.complexForm.value)
+        );
   }
 
 
@@ -134,22 +145,22 @@ export class ProfileComponent {
   }
 
   showEdit(host) {
-  	this.host = host;
+    this.host = host;
     this.changeState('edit', host.$key);
-    this.activeTitle =   	host.title;
-    this.activeFeaturedImage =	host.featuredImage;
-    this.activeCountry =    	host.country;
-    this.activeCity =       	host.city;
-    this.activeState =      	host.state;
-    this.activeImages =      	host.images;
+    this.activeTitle =     host.title;
+    this.activeFeaturedImage =  host.featuredImage;
+    this.activeCountry =      host.country;
+    this.activeCity =         host.city;
+    this.activeState =        host.state;
+    this.activeImages =        host.images;
   }
 
   updateHost() {
-	var updHost = this.complexForm.value;
-	updHost.isActive = true;
+  var updHost = this.complexForm.value;
+  updHost.isActive = true;
     this._firebaseService.updateHost(this.host.$key, updHost);
 
-	this.host.isActive = true;
+  this.host.isActive = true;
     this.changeState('default', null);
   }
 
@@ -167,15 +178,18 @@ export class ProfileComponent {
   }
 
   getProfile() {
-    var user = firebase.auth().currentUser;
-    this.host = this._firebaseService.getOwner(user.uid);
+    var userAuth = firebase.auth().currentUser;
+    console.log("THISPROFILEPROFILE");
+    this.host = this._firebaseService.getProfileHost(userAuth.uid);
+    console.log("THISPROFILEPROFILE");
+    console.log(this.host);
   }
 
 createHost() {
-    var user = firebase.auth().currentUser;
+    var userAuth = firebase.auth().currentUser;
 
     this.newHost = {
-      uid:user.uid,
+      uid:userAuth.uid,
       title:'',
       isActive:false,
       featuredImage:'',
@@ -191,7 +205,7 @@ createHost() {
       expectedWorkingTime:'',
       latitude:null,
       longitude:null,
-      accomodation:'',
+      accommodation:'',
       skillsNeeded:[],
       createdAt:new Date().toString()
     }

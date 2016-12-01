@@ -22,11 +22,15 @@ export class HostListComponent implements OnInit {
   constructor(private _firebaseService: FirebaseService) { }
 
   ngOnInit() {
-    this._firebaseService.getHosts().subscribe(hosts => {
-
-      this.hosts = hosts;
+    this._firebaseService.getActiveHosts().subscribe(hosts => {
+      this.data = hosts;
     });
-     this.filterData();
+
+    console.log(this.data);
+
+
+
+
   }
 
     filterData() {

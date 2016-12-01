@@ -5,5 +5,5 @@ import { HostListComponent } from "./host-list/host-list.component";
 
 export const HOST_ROUTES: Routes = [
   { path: '', component: HostListComponent },
-  { path: ':id', component: HostDetailComponent },
+  { path: ':id', component: HostDetailComponent }
 ];

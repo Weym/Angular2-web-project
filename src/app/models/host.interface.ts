@@ -19,6 +19,6 @@ export interface Host {
   createdAt:string;
   latitude:number;
   longitude:number;
-  accomodation:string;
+  accommodation:string;
   skillsNeeded:string[];
 }
