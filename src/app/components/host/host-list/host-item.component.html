@@ -1,23 +1,23 @@
-		<div class=bs-example data-example-id=media-alignment>
-			<div class=media>
-				<div class="media-left media-middle">
-					<a [routerLink]=[hostId]> 
-						<img alt="Generic placeholder image" src="{{host.featuredImage}}" class=media-object>
-					</a>
-					<div class="outer">
-						<div class="btn-group" role="group">
-						  <button type="button" class="btn btn-info">More</button>
-						  <button type="button" class="btn btn-success">Contact</button>
-						</div>
+		<div class="host">
+			<div class="photo col-md-2">
+				<img src="{{host.featuredImage}}">
+			</div>
+			<div class="info col-md-10">
+				<div class="info-top">
+					<div class="title">
+						<a [routerLink]=[hostId]><h3>{{host.title | capitalizeFirstLetter}}</h3></a>
+					</div>
+					<div class="location">
+						<small>{{host.city}}, {{host.country | uppercase}}</small>
 					</div>
 				</div>
-				<div class=media-body>
-					<a [routerLink]=[hostId]> <h4 class=media-heading>{{host.title | capitalizeFirstLetter}}<span class="label label-success">{{host.country}}</span></h4>
-					<p>{{host.placeDescription | capitalizeFirstLetter | textMaxLength}}</p></a>
-					<div class="test">
-						<p>Member Since: {{host.created_at}}</p>
+				<div class="info-bottom">
+					<div class="accommodation col-md-6">
+						<p>{{host.accommodation}}</p>
 					</div>
-					
+					<div class="contact col-md-6">
+					  <button type="button" class="btn btn-success">Contact</button>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -22,7 +22,6 @@ import { Router } from "@angular/router";
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  providers: [FirebaseService],
     animations: [
         trigger('flyInOut', [
             state('in', style({ opacity: 1, transform: 'translateX(0)' })),
@@ -43,6 +42,10 @@ import { Router } from "@angular/router";
     ]
 })
 export class ProfileComponent {
+  lat = 40.7829;
+  lng = -73.968285;
+  zoom = 10;
+
   profile:any;
   animation: boolean = true;
   user:User;
@@ -70,17 +73,21 @@ export class ProfileComponent {
 
     this._firebaseService.getProfile("hosts").subscribe(hosts => {
       this.hosts = hosts;
+      this.host = hosts[0];
+      if (this.host){
+        console.log(this.host);
+        this.initForm();
+      } else {
+        console.log(this.host);
+        this.createHost();
+      }
     });
 
-    this._firebaseService.getProfile("users").subscribe(users => {
-      this.users = users;
-    });
 
       console.log(this.hosts);
       console.log(this.users);
 /*
       if (!this.host) {
-        this.createHost();
         this.getProfile();
       }
         this.initForm();
@@ -89,7 +96,7 @@ export class ProfileComponent {
 
   }
 
-  private initForm() {
+private initForm() {
     let imagesDisplay: FormArray = new FormArray([]);
 
       if (this.host.hasOwnProperty('images')) {
@@ -105,16 +112,19 @@ export class ProfileComponent {
 
     this.complexForm = this.formBuilder.group({
       'title' : [this.host.title, Validators.required],
-      'country': ['', Validators.required],
-      'city': ['', Validators.required],
-      'state': ['', Validators.required],
-      'featuredImage': ['', Validators.required],
-      'placeDescription': ['', Validators.compose([Validators.required, Validators.minLength(150)])], 
-      'benefits': [''],
-      'accommodation': ['', Validators.required],
-      'languages': [''],
-      'skillsNeeded': [''],
-    'expectedFromVolunteers': ['', Validators.compose([Validators.required, Validators.minLength(150)])],
+      'email' : [this.host.email, Validators.required],
+      'country': [this.host.country, Validators.required],
+      'city': [this.host.city, Validators.required],
+      'state': [this.host.state, Validators.required],
+      'featuredImage': [this.host.featuredImage, Validators.required],
+      'placeDescription': [this.host.placeDescription, Validators.compose([Validators.required, Validators.minLength(150)])], 
+      'benefits': [this.host.benefits],
+      'accommodation': [this.host.accommodation, Validators.required],
+      'languages': [this.host.languages],
+      'skillsNeeded': [this.host.skillsNeeded],
+      'latitude': [this.host.latitude],
+      'longitude': [this.host.longitude],
+      'expectedFromVolunteers': [this.host.expectedFromVolunteers, Validators.compose([Validators.required, Validators.minLength(150)])],
         meats: this.formBuilder.group({
           meatHam: this.formBuilder.control(null),
           meatTurkey: this.formBuilder.control(null),
@@ -156,8 +166,11 @@ export class ProfileComponent {
   }
 
   updateHost() {
+    console.log
   var updHost = this.complexForm.value;
   updHost.isActive = true;
+  updHost.latitude = parseFloat(updHost.latitude);
+  updHost.longitude = parseFloat(updHost.longitude);
     this._firebaseService.updateHost(this.host.$key, updHost);
 
   this.host.isActive = true;
@@ -165,6 +178,9 @@ export class ProfileComponent {
   }
 
   onAddImage(title:string, url: string) {
+    if ((<FormArray>this.complexForm.controls['images']).length > 3) {
+      console.log("Images Limit");
+    } else {
     (<FormArray>this.complexForm.controls['images']).push(
       new FormGroup({
         title: new FormControl(title, Validators.required),
@@ -172,52 +188,50 @@ export class ProfileComponent {
       })
     );
   }
+  }
 
   onRemoveImage(index: number) {
     (<FormArray>this.complexForm.controls['images']).removeAt(index);
   }
 
   getProfile() {
-    var userAuth = firebase.auth().currentUser;
-    console.log("THISPROFILEPROFILE");
-    this.host = this._firebaseService.getProfileHost(userAuth.uid);
-    console.log("THISPROFILEPROFILE");
-    console.log(this.host);
+    var user = firebase.auth().currentUser;
+    console.log(user);
+    this.host = this._firebaseService.getProfileHost(user.uid);
   }
 
-createHost() {
-    var userAuth = firebase.auth().currentUser;
+  createHost() {
+      var user = firebase.auth().currentUser;
 
-    this.newHost = {
-      uid:userAuth.uid,
-      title:'',
-      isActive:false,
-      featuredImage:'',
-      country:'',
-      city:'',
-      state:'',
-      images:[],
-      languages:[],
-      placeDescription:'',
-      email:'',
-      benefits:'',
-      expectedFromVolunteers:'',
-      expectedWorkingTime:'',
-      latitude:null,
-      longitude:null,
-      accommodation:'',
-      skillsNeeded:[],
-      createdAt:new Date().toString()
+      this.newHost = {
+        uid:user.uid,
+        title:'',
+        isActive:false,
+        featuredImage:'',
+        country:'',
+        city:'',
+        state:'',
+        images:[],
+        languages:[],
+        placeDescription:'',
+        email:'',
+        benefits:'',
+        expectedFromVolunteers:'',
+        expectedWorkingTime:'',
+        latitude:null,
+        longitude:null,
+        accommodation:'',
+        skillsNeeded:[],
+        createdAt:new Date().toString()
+      }
+
+      console.log("---------------------------------------");
+      console.log("SignUpAddHost");
+      console.log(this.newHost);
+      console.log("---------------------------------------");
+
+      this._firebaseService.addHost(this.newHost);
+      console.log(this.newHost);
     }
-
-    console.log("---------------------------------------");
-    console.log("SignUpAddHost");
-    console.log(this.newHost);
-    console.log("---------------------------------------");
-
-    this._firebaseService.addHost(this.newHost);
-    console.log(this.newHost);
-  }
-
 
 }

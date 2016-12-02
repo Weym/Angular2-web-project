@@ -43,9 +43,10 @@
 
 .navbar-inverse .navbar-nav>li>a {
   color: #e0e0e0;
-  text-transform: uppercase;
   padding-top: 25px;
   padding-bottom: 10px;
+  font-family: Source Sans Pro;
+  font-weight: 300;
 }
 
 .navbar-inverse .navbar-nav>li>a:hover {
@@ -65,10 +66,33 @@ ul.nav, .jumbotron h1 {
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
+  background-color: transparent;
+  margin-top: -5px;
+  padding-bottom: 15px;
+}
+
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus{
   background-color: #337AA6;
   margin-top: -5px;
   padding-bottom: 15px;
 }
+
+nav .container {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.navbar-left {
+    margin-left: 26px;
+    margin-top: -1px;
+}
+
+.navbar-right {
+    margin-right: -170px;
+}
+
 
 
 /* ------------------------------------ */
@@ -93,6 +117,7 @@ ul.nav, .jumbotron h1 {
 }
 
 .jumbotron h1 {
+  font-family: 'Open Sans', 'Helvetica Neue';
   padding: 10px;
   text-align: center;
   margin: 70px 20px;
@@ -103,8 +128,10 @@ ul.nav, .jumbotron h1 {
 }
 
 .jumbotron p {
+  font-family: Open Sans-serif;
+  font-weight: 300;
+  letter-spacing: 1px;
   margin-bottom: 50px;
-  font-weight: 100;
   padding: 0 50px;
   opacity: .9;
 }
@@ -147,7 +174,7 @@ ul.nav, .jumbotron h1 {
     opacity: .9;
 }
 
-.section-reset h2, h3 {
+.section-reset h2 h3 {
     font-family: 'Arvo', courier, serif;
     text-transform: uppercase;
 }

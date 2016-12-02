@@ -11,11 +11,14 @@ import { Subscription } from "rxjs";
   providers: [FirebaseService]
 })
 export class HostDetailComponent implements OnInit {
+  zoom = 10;
   selectedHost: Host;
   private hostIndex: string;
   private subscription: Subscription;
 
-  constructor(private route: ActivatedRoute, private _firebaseService: FirebaseService) { }
+  constructor(private route: ActivatedRoute, private _firebaseService: FirebaseService) { 
+    console.log(this.selectedHost);
+  }
 
   ngOnInit() {
     this.subscription = this.route.params.subscribe(

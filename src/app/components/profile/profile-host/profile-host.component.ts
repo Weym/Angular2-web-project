@@ -1,4 +1,4 @@
-import { Component, trigger,
+import { Component, Input, trigger,
     state,
     style,
     animate,
@@ -41,9 +41,10 @@ import { Subscription } from "rxjs/Rx";
     ]
 })
 export class ProfileHostComponent {
+
   zoom: number = 10;
   animation: boolean = true;
-  host:Host;
+  @Input() host:Host;
   newHost:Host;
   complexForm: FormGroup;
   appState: string = "default";
@@ -60,12 +61,6 @@ export class ProfileHostComponent {
 
   constructor(private route: ActivatedRoute, private _firebaseService: FirebaseService,
   	private formBuilder: FormBuilder) {
-  	this.getProfile();
-    if (!this.host) {
-    	this.createHost();
-    	this.getProfile();
-    }
-    	this.initForm();
 	console.log("This.host");
 	console.log("------------------------------------------------")
 	console.log(this.host);

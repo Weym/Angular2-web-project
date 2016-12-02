@@ -1,14 +1,148 @@
-HOST DETAIL WORKING
-<button class="btn btn-alert"  [routerLink]="['../']">Go Back</button>
-<div class="row">
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <h1>{{selectedHost?.title}}</h1>
-  </div>
-  <div class="col-xs-12">
-    <button class="btn btn-success">To Shopping List</button>
-    <button class="btn btn-primary" (click)="onEdit()">Edit</button>
-    <button class="btn btn-danger" (click)="onDelete()">Delete</button>
-  </div>
-</div>
+      <div id="details">
+      	<div *ngIf="selectedHost">
+			<div class="cover">
+				<img src="{{selectedHost.featuredImage}}">
+			</div>
+			<div class="header">
+	        	<h2>{{selectedHost.title | capitalizeFirstLetter}}</h2>
+				<small><i class="fa fa-map-marker" fa-2x></i> {{selectedHost.country}}, {{selectedHost.city}}</small>
+			</div>
+			<div class="resume container-fluid">
+				<div class="col-md-8"></div>
+				<div class="col-md-4">
+					<button type="button" class="wishlist btn btn-lg btn-default"><i class="fa fa-heart-o"></i> Wishlist</button>
+				</div>
+			</div>
+			
+			
+			<div class="container">
+					<div class="col-md-11 col-md-offset-1 whoweare">
+							<hr align="left" width="250px">
+						<h3>Who we are</h3>
+						<div class="col-md-7">
+							<div class="col-md-2">
+								<i class="fa fa-file-text-o fa-2x"></i>
+							</div>
+							<div class="col-md-9">
+								<div class="who">
+									<p>{{selectedHost.benefits}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+				
+				<div class="col-md-11 col-md-offset-1 help-needed">
+				<hr align="left" width="500px">
+					<h3>What we need</h3>
+					<div class="col-md-12">
+						<div class="col-md-1">
+							<i class="fa fa-comments-o fa-2x"></i>
+						</div>
+						<div class="col-md-10">
+							<dl class="expectedFromVolunteers">
+								<dt>Languages spoken</dt>
+								<dd>{{selectedHost.expectedFromVolunteers}}</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-1">
+							<i class="fa fa-pencil-square-o fa-2x"></i>
+						</div>
+						<div class="col-md-10">
+							<dl class="skillsNeeded">
+								<dt>Skills we need</dt>
+								<dd>{{selectedHost.skillsNeeded}}</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="col-md-11 col-md-offset-1 help-needed">
+				<hr align="left" width="500px">
+					<h3>Basic info</h3>
+						<div class="col-md-4">
+							<div class="col-md-3">
+								<i class="fa fa-comments-o fa-2x"></i>
+							</div>
+							<div class="col-md-9">
+								<dl class="languages">
+									<dt>Languages spoken</dt>
+									<dd>{{selectedHost.languages}}</dd>
+								</dl>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="col-md-3">
+								<i class="fa fa-bed fa-2x"></i>
+							</div>
+							<div class="col-md-9">
+								<dl class="accommodation">
+									<dt>Accommodation </dt>
+									<dd>{{selectedHost.accommodation}}</dd>
+								</dl>
+							</div>
+						</div>
+				</div>
+				<div class="col-md-11 col-md-offset-1 basic-info">
+						<div class="col-md-4">
+							<div class="col-md-3">
+								<i class="fa fa-clock-o fa-2x"></i>
+							</div>
+							<div class="col-md-9">
+								<dl class="workingtime">
+								<dt>Hours expected</dt>
+								<dd>{{selectedHost.expectedWorkingTime}}</dd>
+								</dl>
+							</div>
+						</div>
+				</div>
+				
+				
+				
+					<div class="col-md-11 col-md-offset-1 expected">
+							<hr align="left" width="250px">
+						<h3>Why come here</h3>
+						<div class="col-md-7">
+							<div class="col-md-2">
+								<i class="fa fa-globe fa-2x"></i>
+							</div>
+							<div class="col-md-9">
+								<div class="benefits">
+									<p>{{selectedHost.benefits}}</p>
+								</div>
+							</div>
+						</div>
+							<hr align="center" width="75%">
+					</div>
+				
+				
+		</div>
+
+
+<section id="showcase" *ngIf="selectedHost.images[0].url">
+	<div class="container">
+	  <div  class="row">
+		<div *ngFor="let img of selectedHost.images; let i = index" class="col-xs-3">
+					<figure class="explore-photo">
+						<img src="{{img.url}}" alt="{{img.title}}">
+					</figure>
+		</div>
+		</div>
+	  </div>
+</section>
+				
+				<hr>
+			
+				<div *ngIf="selectedHost.latitude && selectedHost.longitude">
+			<sebm-google-map [latitude]="selectedHost.latitude" [longitude]="selectedHost.longitude" [zoom]="zoom" [disableDefaultUI]=false>
+			  <sebm-google-map-marker [latitude]="selectedHost.latitude" [longitude]="selectedHost.longitude"></sebm-google-map-marker>
+			</sebm-google-map>
+			</div>
+				
+				
+		</div>
+
+      </div>

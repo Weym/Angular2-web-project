@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TextMaxLengthPipe implements PipeTransform {
 
   transform(value: any) {
-    if (value.length > 240) {
-    	return value.slice(0,240)+"...";
+    if (value.length > 100) {
+    	return value.slice(0,100)+"...";
     }
     return value;
   }

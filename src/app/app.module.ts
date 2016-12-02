@@ -12,6 +12,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ProtectedComponent } from "./components/protected/protected.component";
 import { AuthGuard } from "./services/auth.guard";
 import { AuthService } from "./services/auth.service";
+import { FirebaseService } from "./services/firebase.service";
 import { routing } from "./app.routing";
 import { HostItemComponent } from './components/host/host-list/host-item.component';
 import { HostEditComponent } from './components/host/host-edit/host-edit.component';
@@ -84,7 +85,8 @@ export const firebaseConfig = {
     ],
     providers: [
         AuthGuard,
-        AuthService
+        AuthService,
+        FirebaseService
     ],
     bootstrap: [AppComponent]
 })

@@ -1,43 +1,87 @@
-.bs-example {
-	margin-right: 0;
-    margin-left: 0;
-    background-color: #fff;
-    border-color: #e5e5e5 #eee #eee;
-    border-width: 1px;
-    border-radius: 4px 4px 0 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    position: relative;
-    padding: 25px 15px 15px;
-    margin: 0 -15px 15px;
-    border-style: solid;
+
+
+.host {
+    margin-bottom: 20px;
+    border-radius: 3px;
+    border: 1px solid #d9d9d9;
+    overflow: hidden;
+    height: 139px;
 }
 
-.test {
-	height: 100%;
-	width: 100%;
-	display: inline-block;
+.host:hover {
+    margin-bottom: 20px;
+    border-radius: 3px;
+    border: 1px solid #3498db;
+    overflow: hidden;
 }
 
-.test p {
-	float: left;
+.accommodation {
+    padding-left: 15px;
 }
 
-.outer {
-    height: 100%;
-    width: 100%;
+.accommodation p {
+    padding-top: 10px;
 }
 
-.btn-group {
-	padding-top: 4px;
-    display: table;
-    margin: 0 auto;
+a {
+    text-decoration: none;
 }
 
-img {
-	height: 150px;
+.location {
+    margin-top: -7px;
 }
 
-.btn-info {
-    border-color: #46B8B6;
+.host .photo {
+    display: block;
+    padding: 0;
+}
+
+.info-top {
+    height: 100px;
+    margin-top: -10px;
+    padding-left: 11px;
+}
+
+.info-bottom {
+    margin-left: 2px;
+    background-color: #ecf0f1;
+    margin-top: -8px;
+    height: 40px;
+}
+
+.info {
+    flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0%;
+    padding: 0;
+    width: 620px;
+    margin-left: 101px;
+}
+
+.host img {
+    border-radius: 3px;
+    width: 171%;
+    border-radius: 3px 0 0 3px;
+    
+}
+
+
+.contact {
+    padding: 0;
+}
+
+.contact button {
+    height: 40px;
+    float: right;
+    border-radius: 0;
+    margin-right: -2px;
+}
+
+.title h3 {
+    margin: 10px 0;
+    font-family: Source Sans Pro;
+    font-weight: 300;
+    font-size: 22px;
+    margin-top: 16px;
 }

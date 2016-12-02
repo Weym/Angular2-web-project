@@ -17,6 +17,7 @@ export class FirebaseService {
 
     getHosts() {
       this.hosts = this._af.database.list('/hosts') as FirebaseListObservable<Host[]>
+      console.log("gethosts");
       return this.hosts;
     }
 
@@ -96,6 +97,11 @@ export class FirebaseService {
   }
 
   updateHost(key, updHost) {
+    console.log("--------------------------------");
+    console.log(key);
+    console.log(updHost);
+    console.log(this.hosts);
+    debugger;
     return this.hosts.update(key, updHost);
   }
 

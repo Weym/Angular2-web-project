@@ -1,0 +1,16 @@
+table {
+    margin-top: 35px;
+}
+
+.container-fluid {
+	padding: 0;
+	width: 100%;
+}
+
+.panel-default {
+    border: 0;
+}
+
+th {
+    padding: 25px;
+}

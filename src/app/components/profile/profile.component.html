@@ -1,12 +1,504 @@
-<div class="normalizenavbar"></div>
-<ul *ngFor="let host of data">
-	<li>{{host.title}}</li>
-</ul>
-<div *ngIf="users">
-	<p *ngFor="let user of users">{{user.firstName}}</p>
-</div>
-<div *ngIf="hosts">
-	<p *ngFor="let host of hosts">{{host.title}}</p>
-</div>
+<div *ngIf="host">
 
-<app-profile-host [hosts]="hosts"></app-profile-host>
+<div id="top-page" class="container">
+  <div class="col-xs-10" style="margin-top: -1px;">
+		<!-- EDIT FORM -->
+
+
+	<div [@flyInOut]="'in'"> 
+<div *ngIf="appState == 'edit' || host.isActive == false" class="row">
+<form  [formGroup]="complexForm" (submit)="updateHost()" class="well form-horizontal">
+	        <h2>Basic Info</h2>
+	        <section id="basic-info">
+			<div class="form-group" [ngClass]="{'has-error':!complexForm.controls['title'].valid && complexForm.controls['title'].touched}">
+			  <label class="col-md-3 control-label" for="title">Title</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
+				<input
+				type="text"
+				id="title"
+				class="form-control"
+				formControlName="title"
+				placeholder="Title">
+			    <i *ngIf="!complexForm.controls['title'].valid && complexForm.controls['title'].touched" class="form-control-feedback glyphicon glyphicon-remove"></i>
+			    <i *ngIf="complexForm.controls['title'].valid" class="form-control-feedback glyphicon glyphicon-ok"></i>
+			    </div>
+				<small *ngIf="complexForm.controls['title'].hasError('required') && complexForm.controls['title'].touched" class="help-block">You must include a Title.</small>
+			  </div>
+			</div>
+
+
+			<div class="form-group" [ngClass]="{'has-error':!complexForm.controls['featuredImage'].valid && complexForm.controls['featuredImage'].touched}">
+			  <label class="col-md-3 control-label" for="featuredImage">Featured Image (Link)</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+				<input
+				type="text"
+				id="featuredImage"
+				class="form-control"
+				formControlName="featuredImage"
+				placeholder="Featured Image" #image>
+			    <i *ngIf="complexForm.controls['featuredImage'].hasError('required') && complexForm.controls['featuredImage'].touched" class="form-control-feedback glyphicon glyphicon-remove"></i>
+			    <i *ngIf="complexForm.controls['featuredImage'].valid" class="form-control-feedback glyphicon glyphicon-ok"></i>
+			    </div>
+				<small *ngIf="complexForm.controls['featuredImage'].hasError('required') && complexForm.controls['featuredImage'].touched" class="help-block">You must include a Featured Image.</small>
+			  </div>
+			  <div class="col-md-3">
+			  	<div class="img">
+			  		<img [src]="image.value" style="height: 100px;">
+		  		</div>
+	  		  </div>
+			</div>
+
+			<div class="form-group" [ngClass]="{'has-error':!complexForm.controls['email'].valid && complexForm.controls['email'].touched}">
+			  <label class="col-md-3 control-label" for="email">Email</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+				<input
+				type="text"
+				id="email"
+				class="form-control"
+				formControlName="email"
+				placeholder="E-Mail Address">
+			    <i *ngIf="complexForm.controls['email'].hasError('required') && complexForm.controls['email'].touched" class="form-control-feedback glyphicon glyphicon-remove"></i>
+			    <i *ngIf="complexForm.controls['email'].valid" class="form-control-feedback glyphicon glyphicon-ok"></i>
+			    </div>
+				<small *ngIf="complexForm.controls['email'].hasError('required') && complexForm.controls['email'].touched" class="help-block">You must include an Email.</small>
+			  </div>
+			</div>
+
+
+			<div class="form-group" [ngClass]="{'has-error':!complexForm.controls['country'].valid && complexForm.controls['country'].touched}">
+			  <label class="col-md-3 control-label" for="country">Country</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+				<input
+				type="text"
+				id="country"
+				class="form-control"
+				formControlName="country"
+				placeholder="Country">
+			    <i *ngIf="complexForm.controls['country'].hasError('required') && complexForm.controls['country'].touched" class="form-control-feedback glyphicon glyphicon-remove"></i>
+			    <i *ngIf="complexForm.controls['country'].valid" class="form-control-feedback glyphicon glyphicon-ok"></i>
+			    </div>
+				<small *ngIf="complexForm.controls['country'].hasError('required') && complexForm.controls['country'].touched" class="help-block">You must include the country your place is from.</small>
+			  </div>
+			</div>
+
+			<div class="form-group" [ngClass]="{'has-error':!complexForm.controls['city'].valid && complexForm.controls['city'].touched}">
+			  <label class="col-md-3 control-label" for="city">City</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+				<input
+				type="text"
+				id="city"
+				class="form-control"
+				formControlName="city"
+				placeholder="City">
+			    <i *ngIf="complexForm.controls['city'].hasError('required') && complexForm.controls['city'].touched" class="form-control-feedback glyphicon glyphicon-remove"></i>
+			    <i *ngIf="complexForm.controls['city'].valid" class="form-control-feedback glyphicon glyphicon-ok"></i>
+			    </div>
+				<small *ngIf="complexForm.controls['city'].hasError('required') && complexForm.controls['city'].touched" class="help-block">You must include the city your place is from.</small>
+			  </div>
+			</div>
+
+			<div class="form-group" [ngClass]="{'has-error':!complexForm.controls['state'].valid && complexForm.controls['state'].touched}">
+			  <label class="col-md-3 control-label" for="state">State</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+				<input
+				type="text"
+				id="state"
+				class="form-control"
+				formControlName="state"
+				placeholder="State">
+			    <i *ngIf="complexForm.controls['state'].hasError('required') && complexForm.controls['state'].touched" class="form-control-feedback glyphicon glyphicon-remove"></i>
+			    <i *ngIf="complexForm.controls['state'].valid" class="form-control-feedback glyphicon glyphicon-ok"></i>
+			    </div>
+				<small *ngIf="complexForm.controls['state'].hasError('required') && complexForm.controls['state'].touched" class="help-block">You must include the state your place is from.</small>
+			  </div>
+			</div>
+
+
+			<div class="form-group">
+	            <label class="col-md-3 control-label">What languages you accept?</label>
+	            <div class="col-md-6">
+	                <div class="checkbox">
+	                    <label>
+	                        <input type="checkbox" name="english" value="English" #r [checked]=false (change)="checkbox(r.value, r.checked)">English
+	                    </label>
+	                </div>
+	                <div class="checkbox">
+	                    <label>
+	                        <input type="checkbox" name="english" value="Portuguese" /> Portuguese
+	                    </label>
+	                </div>
+	                <div class="checkbox">
+	                    <label>
+	                        <input type="checkbox" name="portuguese" value="German" /> German
+	                    </label>
+	                </div>
+	            </div>
+       		</div>
+       		</section>
+
+	        <hr>
+	        <h2>More details about you</h2>
+			<div class="form-group" [ngClass]="{'has-error':!complexForm.controls['placeDescription'].valid && complexForm.controls['placeDescription'].touched}">
+			  <label class="col-md-3 control-label" for="placeDescription">Tell about yourself and your place</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+				<textarea
+				type="text"
+				id="placeDescription"
+				class="form-control"
+				formControlName="placeDescription"
+				placeholder="Description"></textarea>
+			    <i *ngIf="!complexForm.controls['placeDescription'].valid && complexForm.controls['placeDescription'].touched" class="form-control-feedback glyphicon glyphicon-remove"></i>
+			    <i *ngIf="complexForm.controls['placeDescription'].valid" class="form-control-feedback glyphicon glyphicon-ok"></i>
+			    </div>
+				<small *ngIf="complexForm.controls['placeDescription'].hasError('required') && complexForm.controls['placeDescription'].touched" class="help-block">You must include a description abour your place..</small>
+				<small *ngIf="complexForm.controls['placeDescription'].hasError('minlength') && complexForm.controls['placeDescription'].touched" class="help-block">Your description must be at least 150 characters long.</small>
+			  </div>
+			</div>
+
+			<div class="form-group">
+			  <label class="col-md-3 control-label" for="benefits">Benefits (How will the travelers benefit from coming to your place?)</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+				<textarea
+				type="text"
+				id="benefits"
+				class="form-control"
+				formControlName="benefits"
+				placeholder="Benefits"></textarea>
+			    </div>
+			  </div>
+			</div>
+
+			<div class="form-group" [ngClass]="{'has-error':!complexForm.controls['accommodation'].valid && complexForm.controls['accommodation'].touched}"> 
+			  <label class="col-md-3 control-label">Accomodation</label>
+			    <div class="col-md-6 selectContainer">
+			    <div class="input-group">
+			        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+	                <select name="accommodation" id="accommodation" class="form-control" formControlName="accommodation" required>
+	                  <option value="">-</option>
+	                  <option value="Shared Dorm">Shared Dorm</option>
+	                  <option value="Private Dorm">Private Dorm</option>
+	                  <option value="Staff Dorm">Staff Dorm</option>
+	                </select>
+			    <i *ngIf="!complexForm.controls['accommodation'].valid && complexForm.controls['accommodation'].touched" class="form-control-feedback glyphicon glyphicon-remove"></i>
+			    <i *ngIf="complexForm.controls['accommodation'].valid" class="form-control-feedback glyphicon glyphicon-ok"></i>
+			  	</div>
+				<small *ngIf="complexForm.controls['accommodation'].hasError('required') && complexForm.controls['accommodation'].touched" class="help-block">Select one type of Accomodation.</small>
+				</div>
+			</div>
+			<div class="form-group"> 
+			<label class="col-md-8"><span id="imagesctrl">Images</span><small>*For better visualization, use images from the same ratio</small></label>
+			</div>
+			<div class="form-group">
+			  <ul class="list-group" formArrayName="images">
+				<div *ngFor="let image of complexForm.controls['images'].controls; let i = index">	
+					<div formGroupName="{{i}}">
+						<div class="col-md-3 div-img-btn">
+							<button class="btn btn-danger img-btn" (click)="onRemoveImage(i)">X</button>
+						</div>
+						<div class="images col-md-6 inputGroupContainer">
+						<div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+						  <input 
+							type="text"
+							class="form-control"
+							formControlName="title" required #f>
+						</div>
+
+						<div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+						  <input
+							type="text"
+							class="form-control"
+							formControlName="url"
+							#url>
+						</div>
+						</div>
+						<div class="col-sm-3 images-img">
+						  <img src="{{url.value}}">
+						</div>
+					</div>
+				  </div>
+				</ul>
+			</div>
+
+			<div class="form-group add-image">
+				<div class="col-md-3 div-img-btn">
+					<button type="button" class="btn btn-primary img-btn"
+	          		(click)="onAddImage(imageTitle.value, imageUrl.value)">+</button>
+				</div>
+				<div class="images col-md-6 inputGroupContainer">
+					<div class="input-group">
+					  <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+	                  <input
+	                    type="text"
+	                    class="form-control"
+	                    placeholder="Image Title"
+	                    #imageTitle>
+					</div>
+
+					<div class="input-group">
+					  <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+					  <input
+	                    type="text"
+	                    class="form-control"
+	                    placeholder="Image Url"
+	                    #imageUrl>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="form-group" [ngClass]="{'has-error':!complexForm.controls['latitude'].valid && complexForm.controls['latitude'].touched}">
+			  <label class="col-md-3 control-label" for="latitude">Latitude</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+				<input
+				type="text"
+				id="latitude"
+				class="form-control"
+				formControlName="latitude"
+				placeholder="40.7829">
+			    <i *ngIf="!complexForm.controls['latitude'].valid && complexForm.controls['latitude'].touched" class="form-control-feedback glyphicon glyphicon-remove"></i>
+			    <i *ngIf="complexForm.controls['latitude'].valid" class="form-control-feedback glyphicon glyphicon-ok"></i>
+			    </div>
+				<small *ngIf="complexForm.controls['latitude'].hasError('required') && complexForm.controls['latitude'].touched" class="help-block">You must include the latitude your place is from.</small>
+			  </div>
+			</div>
+
+			<div class="form-group" [ngClass]="{'has-error':!complexForm.controls['longitude'].valid && complexForm.controls['longitude'].touched}">
+			  <label class="col-md-3 control-label" for="longitude">Longitude</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+				<input
+				type="text"
+				id="longitude"
+				class="form-control"
+				formControlName="longitude"
+				placeholder="-73.9654">
+			    <i *ngIf="!complexForm.controls['longitude'].valid && complexForm.controls['longitude'].touched" class="form-control-feedback glyphicon glyphicon-remove"></i>
+			    <i *ngIf="complexForm.controls['longitude'].valid" class="form-control-feedback glyphicon glyphicon-ok"></i>
+			    </div>
+				<small *ngIf="complexForm.controls['longitude'].hasError('required') && complexForm.controls['longitude'].touched" class="help-block">You must include the longitude your place is from.</small>
+			  </div>
+			</div>
+
+	        <hr>
+	        <h2>About Volunteers</h2>
+
+
+			
+			<div class="form-group">
+			  <label class="col-md-3 control-label" for="skillsNeeded">What skills are you looking for?</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
+				<input
+				type="text"
+				id="skillsNeeded"
+				class="form-control"
+				formControlName="skillsNeeded"
+				placeholder="Skills you are looking for">
+			    </div>
+			  </div>
+			</div>
+
+
+
+			<div class="form-group" [ngClass]="{'has-error':!complexForm.controls['expectedFromVolunteers'].valid && complexForm.controls['expectedFromVolunteers'].touched}">
+			  <label class="col-md-3 control-label" for="expectedFromVolunteers">Expected From Volunteer</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
+				<textarea
+				type="text"
+				id="expectedFromVolunteers"
+				class="form-control"
+				formControlName="expectedFromVolunteers"
+				placeholder="What you need your volunteers to do?"></textarea>
+			    <i *ngIf="!complexForm.controls['expectedFromVolunteers'].valid && complexForm.controls['expectedFromVolunteers'].touched" class="form-control-feedback glyphicon glyphicon-remove"></i>
+			    <i *ngIf="complexForm.controls['expectedFromVolunteers'].valid" class="form-control-feedback glyphicon glyphicon-ok"></i>
+			    </div>
+				<small *ngIf="complexForm.controls['expectedFromVolunteers'].hasError('required') && complexForm.controls['expectedFromVolunteers'].touched" class="help-block">Write what you expect from your volunteers</small>
+				<small *ngIf="complexForm.controls['expectedFromVolunteers'].hasError('minlength') && complexForm.controls['expectedFromVolunteers'].touched" class="help-block">Write at least 150 characters.</small>
+			  </div>
+			</div>
+        <input type="submit" class="btn btn-primary" value="Submit" [disabled]="!complexForm.valid">
+        <input type="submit" class="btn btn-primary" value="Submit">
+		    <button type="submit" class="btn btn-warning" value="Submit" [disabled]="!complexForm.valid">Send <span class="glyphicon glyphicon-send"></span></button>
+	</form>
+		  <div class="col-md-1">
+			<button class="btn btn-profile" (click)="changeState('default', host.$key)">Go Back</button>
+		  </div>
+	</div> </div></div></div>
+
+      <div id="details">
+      	<div *ngIf="appState == 'default' && host.isActive == true">
+			<div class="cover">
+				<img src="{{host.featuredImage}}">
+			</div>
+			<div class="header">
+	        	<h2>{{host.title}}</h2>
+				<small><i class="fa fa-map-marker" fa-2x></i> {{host.country}}, {{host.city}}</small>
+			</div>
+			<div class="resume container-fluid">
+				<div class="col-md-8"></div>
+				<div class="col-md-4">
+					<button type="button" class="wishlist btn btn-lg btn-default"><i class="fa fa-heart-o"></i> Wishlist</button>
+				</div>
+			</div>
+			
+			
+			<div class="container">
+					<div class="col-md-11 col-md-offset-1 whoweare">
+							<hr align="left" width="250px">
+						<h3>Who we are</h3>
+						<div class="col-md-7">
+							<div class="col-md-2">
+								<i class="fa fa-file-text-o fa-2x"></i>
+							</div>
+							<div class="col-md-9">
+								<div class="who">
+									<p>{{host.benefits}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+				
+				<div class="col-md-11 col-md-offset-1 help-needed">
+				<hr align="left" width="500px">
+					<h3>What we need</h3>
+					<div class="col-md-12">
+						<div class="col-md-1">
+							<i class="fa fa-comments-o fa-2x"></i>
+						</div>
+						<div class="col-md-10">
+							<dl class="expectedFromVolunteers">
+								<dt>Languages spoken</dt>
+								<dd>{{host.expectedFromVolunteers}}</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-1">
+							<i class="fa fa-pencil-square-o fa-2x"></i>
+						</div>
+						<div class="col-md-10">
+							<dl class="skillsNeeded">
+								<dt>Skills we need</dt>
+								<dd>{{host.skillsNeeded}}</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="col-md-11 col-md-offset-1 help-needed">
+				<hr align="left" width="500px">
+					<h3>Basic info</h3>
+						<div class="col-md-4">
+							<div class="col-md-3">
+								<i class="fa fa-comments-o fa-2x"></i>
+							</div>
+							<div class="col-md-9">
+								<dl class="languages">
+									<dt>Languages spoken</dt>
+									<dd>{{host.languages}}</dd>
+								</dl>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="col-md-3">
+								<i class="fa fa-bed fa-2x"></i>
+							</div>
+							<div class="col-md-9">
+								<dl class="accommodation">
+									<dt>Accommodation </dt>
+									<dd>{{host.accommodation}}</dd>
+								</dl>
+							</div>
+						</div>
+				</div>
+				<div class="col-md-11 col-md-offset-1 basic-info">
+						<div class="col-md-4">
+							<div class="col-md-3">
+								<i class="fa fa-clock-o fa-2x"></i>
+							</div>
+							<div class="col-md-9">
+								<dl class="workingtime">
+								<dt>Hours expected</dt>
+								<dd>{{host.expectedWorkingTime}}</dd>
+								</dl>
+							</div>
+						</div>
+				</div>
+				
+				
+				
+					<div class="col-md-11 col-md-offset-1 expected">
+							<hr align="left" width="250px">
+						<h3>Why come here</h3>
+						<div class="col-md-7">
+							<div class="col-md-2">
+								<i class="fa fa-globe fa-2x"></i>
+							</div>
+							<div class="col-md-9">
+								<div class="benefits">
+									<p>{{host.benefits}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+				
+		</div>
+				
+
+
+<section id="showcase">
+	<div class="container">
+	  <div  class="row">
+		<div *ngFor="let img of host.images" class="col-xs-3">
+					<figure class="explore-photo">
+						<img src="{{img.url}}" alt="{{img.title}}">
+					</figure>
+		</div>
+		</div>
+	  </div>
+</section>
+				
+				<hr>
+	        <div>
+	          <button class="btn btn-default">More</button>
+	          <button class="btn btn-alert" (click)="showEdit(host)">Edit</button>
+	        </div>
+			
+				
+			<sebm-google-map [latitude]="host.latitude" [longitude]="host.longitude" [zoom]="zoom" [disableDefaultUI]=false>
+			  <sebm-google-map-marker [latitude]="host.latitude" [longitude]="host.longitude"></sebm-google-map-marker>
+			</sebm-google-map>
+				
+				
+		</div>
+
+      </div>
+    </div>
