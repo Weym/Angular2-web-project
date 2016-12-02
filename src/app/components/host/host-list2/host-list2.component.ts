@@ -12,7 +12,6 @@ import { Host } from "../../../models/host.interface";
 export class HostList2Component implements OnInit {
   hosts: Host[];
   host: Host;
-  test: Host[] = [];
 
     public data;
     public filterQuery = "";
@@ -22,21 +21,13 @@ export class HostList2Component implements OnInit {
 
   constructor(private _firebaseService: FirebaseService) { }
 
+
   ngOnInit() {
-    this._firebaseService.getHosts().subscribe(hosts => {
-
-      this.hosts = hosts;
+    this._firebaseService.getActiveHosts().subscribe(hosts => {
+      this.data = hosts;
     });
-     this.filterData();
-  }
 
-  filterData() {
-    for (let host of this.hosts) {
-      if (host.isActive) {
-        this.test.push(host);
-      }
-      this.data = this.test;
-    }
+    console.log(this.data);
   }
 
     public toInt(num: string) {

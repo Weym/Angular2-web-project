@@ -125,27 +125,23 @@
 			  </div>
 			</div>
 
-
-			<div class="form-group">
-	            <label class="col-md-3 control-label">What languages you accept?</label>
-	            <div class="col-md-6">
-	                <div class="checkbox">
-	                    <label>
-	                        <input type="checkbox" name="english" value="English" #r [checked]=false (change)="checkbox(r.value, r.checked)">English
-	                    </label>
-	                </div>
-	                <div class="checkbox">
-	                    <label>
-	                        <input type="checkbox" name="english" value="Portuguese" /> Portuguese
-	                    </label>
-	                </div>
-	                <div class="checkbox">
-	                    <label>
-	                        <input type="checkbox" name="portuguese" value="German" /> German
-	                    </label>
-	                </div>
-	            </div>
-       		</div>
+			<div class="form-group" [ngClass]="{'has-error':!complexForm.controls['languages'].valid && complexForm.controls['languages'].touched}">
+			  <label class="col-md-3 control-label" for="languages">Languages</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
+				<input
+				type="text"
+				id="languages"
+				class="form-control"
+				formControlName="languages"
+				placeholder="Languages you can communicate">
+			    <i *ngIf="complexForm.controls['languages'].hasError('required') && complexForm.controls['languages'].touched" class="form-control-feedback glyphicon glyphicon-remove"></i>
+			    <i *ngIf="complexForm.controls['languages'].valid" class="form-control-feedback glyphicon glyphicon-ok"></i>
+			    </div>
+				<small *ngIf="complexForm.controls['languages'].hasError('required') && complexForm.controls['languages'].touched" class="help-block">You must include the languages you can communicate</small>
+			  </div>
+			</div>
        		</section>
 
 	        <hr>
@@ -310,7 +306,7 @@
 			  <label class="col-md-3 control-label" for="skillsNeeded">What skills are you looking for?</label>  
 			  <div class="col-md-6 inputGroupContainer">
 			  <div class="input-group">
-			  <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
 				<input
 				type="text"
 				id="skillsNeeded"
@@ -318,6 +314,24 @@
 				formControlName="skillsNeeded"
 				placeholder="Skills you are looking for">
 			    </div>
+			  </div>
+			</div>
+
+			<div class="form-group" [ngClass]="{'has-error':!complexForm.controls['expectedWorkingTime'].valid && complexForm.controls['expectedWorkingTime'].touched}">
+			  <label class="col-md-3 control-label" for="expectedWorkingTime">Expected working time<small> *hours/week</small></label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+				<input
+				type="number"
+				id="expectedWorkingTime"
+				class="form-control"
+				formControlName="expectedWorkingTime"
+				placeholder="Expected working time">
+			    <i *ngIf="complexForm.controls['expectedWorkingTime'].hasError('required') && complexForm.controls['expectedWorkingTime'].touched" class="form-control-feedback glyphicon glyphicon-remove"></i>
+			    <i *ngIf="complexForm.controls['expectedWorkingTime'].valid" class="form-control-feedback glyphicon glyphicon-ok"></i>
+			    </div>
+				<small *ngIf="complexForm.controls['expectedWorkingTime'].hasError('required') && complexForm.controls['expectedWorkingTime'].touched" class="help-block">What is expected from the volunteers?</small>
 			  </div>
 			</div>
 
@@ -341,12 +355,23 @@
 				<small *ngIf="complexForm.controls['expectedFromVolunteers'].hasError('minlength') && complexForm.controls['expectedFromVolunteers'].touched" class="help-block">Write at least 150 characters.</small>
 			  </div>
 			</div>
-        <input type="submit" class="btn btn-primary" value="Submit" [disabled]="!complexForm.valid">
-        <input type="submit" class="btn btn-primary" value="Submit">
-		    <button type="submit" class="btn btn-warning" value="Submit" [disabled]="!complexForm.valid">Send <span class="glyphicon glyphicon-send"></span></button>
+
+			<div class="form-group">
+			  <label class="col-md-3 control-label" for="expectedFromVolunteers">Activate or Deactivate account</label>  
+			  <div class="col-md-6 inputGroupContainer">
+			  <div class="input-group">
+			  <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
+				<input type="checkbox" id="isActive" formControlName="expectedWorkingTime">
+			    </div>
+			  </div>
+			</div>
+
+
+
+        <input type="submit" class="submit btn btn-primary btn-lg" value="Submit" [disabled]="!complexForm.valid">
 	</form>
 		  <div class="col-md-1">
-			<button class="btn btn-profile" (click)="changeState('default', host.$key)">Go Back</button>
+			<button *ngIf="host.isActive" class="btn btn-profile" (click)="changeState('default', host.$key)">Go Back</button>
 		  </div>
 	</div> </div></div></div>
 
@@ -360,7 +385,10 @@
 				<small><i class="fa fa-map-marker" fa-2x></i> {{host.country}}, {{host.city}}</small>
 			</div>
 			<div class="resume container-fluid">
-				<div class="col-md-8"></div>
+				<div class="col-md-4">
+	          		<button class="edit btn btn-primary btn-lg" (click)="showEdit(host)">Edit</button>
+				</div>
+				<div class="date col-md-4"></div>
 				<div class="col-md-4">
 					<button type="button" class="wishlist btn btn-lg btn-default"><i class="fa fa-heart-o"></i> Wishlist</button>
 				</div>
@@ -393,7 +421,7 @@
 						</div>
 						<div class="col-md-10">
 							<dl class="expectedFromVolunteers">
-								<dt>Languages spoken</dt>
+								<dt>Expected from volunteers</dt>
 								<dd>{{host.expectedFromVolunteers}}</dd>
 							</dl>
 						</div>
@@ -445,7 +473,7 @@
 							</div>
 							<div class="col-md-9">
 								<dl class="workingtime">
-								<dt>Hours expected</dt>
+								<dt>Hours expected <small> *hours/week</small></dt>
 								<dd>{{host.expectedWorkingTime}}</dd>
 								</dl>
 							</div>
@@ -487,10 +515,6 @@
 </section>
 				
 				<hr>
-	        <div>
-	          <button class="btn btn-default">More</button>
-	          <button class="btn btn-alert" (click)="showEdit(host)">Edit</button>
-	        </div>
 			
 				
 			<sebm-google-map [latitude]="host.latitude" [longitude]="host.longitude" [zoom]="zoom" [disableDefaultUI]=false>

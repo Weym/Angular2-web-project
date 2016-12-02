@@ -18,6 +18,10 @@
     margin-top: 31px;
 }
 
+.submit {
+    margin-left: 150px;
+}
+
 .img {
     height: 100px;
     margin-top: -48px;
@@ -207,4 +211,13 @@ h3 {
 #imagesctrl {
     margin-left: 192px;
     padding-right: 34px;
+}
+
+.edit {
+    width: 90px;
+    margin-top: 9px;
+}
+
+.date {
+    margin-top: 22px;
 }

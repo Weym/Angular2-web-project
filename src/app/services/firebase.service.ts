@@ -2,14 +2,11 @@ import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import 'rxjs/add/operator/map';
 import { Host } from "../models/host.interface";
-import { User } from "../models/user";
 
 @Injectable()
 export class FirebaseService {
   hosts: FirebaseListObservable<Host[]>;
   host: Host;
-  users: FirebaseListObservable<User[]>;
-  user:User;
   profile:any;
   uid;
 
@@ -69,17 +66,6 @@ export class FirebaseService {
     return this.host;
   }
 
-  getProfileUser(uid:string) {
-    this.getUsers().subscribe(users =>{
-      for (let user  of users) {
-        if (uid == user.uid) {
-          this.user = user;
-        }
-      }
-    });
-    return this.user;
-  }
-
 
   getHost(key:string) {
     this.getHosts().subscribe(hosts=>{
@@ -93,6 +79,10 @@ export class FirebaseService {
   }
 
   addHost(newHost) {
+    console.log("--------------------------------");  
+    console.log(newHost);
+    console.log(newHost);
+    this.getHosts();
     return this.hosts.push(newHost);
   }
 
@@ -101,28 +91,7 @@ export class FirebaseService {
     console.log(key);
     console.log(updHost);
     console.log(this.hosts);
-    debugger;
     return this.hosts.update(key, updHost);
-  }
-
-  getUsers() {
-    this.users = this._af.database.list('/users') as FirebaseListObservable<User[]>
-    return this.users;
-  }
-
-  getUser(key:string) {
-    this.getUsers().subscribe(users=>{
-        users.forEach(user => {
-          if (key == user.$key){
-          this.user = user;
-          }
-        });
-    })
-    return this.user;
-  }
-
-  addUser(newUser) {
-    return this.users.push(newUser);
   }
 
   updateUser(key, updUser) {

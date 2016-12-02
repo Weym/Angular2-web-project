@@ -56,12 +56,6 @@ export class ProfileComponent {
   complexForm: FormGroup;
   appState: string = "default";
   activeKey: string;
-  activeTitle;
-  activeFeaturedImage;
-  activeCountry;
-  activeCity;
-  activeState;
-  activeImages:Image[];
   private subscription: Subscription;
   private isNew = true;
   userAuth = firebase.auth().currentUser;
@@ -75,25 +69,9 @@ export class ProfileComponent {
       this.hosts = hosts;
       this.host = hosts[0];
       if (this.host){
-        console.log(this.host);
         this.initForm();
-      } else {
-        console.log(this.host);
-        this.createHost();
       }
     });
-
-
-      console.log(this.hosts);
-      console.log(this.users);
-/*
-      if (!this.host) {
-        this.getProfile();
-      }
-        this.initForm();
-*/
-    
-
   }
 
 private initForm() {
@@ -122,15 +100,12 @@ private initForm() {
       'accommodation': [this.host.accommodation, Validators.required],
       'languages': [this.host.languages],
       'skillsNeeded': [this.host.skillsNeeded],
+      'expectedWorkingTime': [this.host.expectedWorkingTime, Validators.required],
       'latitude': [this.host.latitude],
       'longitude': [this.host.longitude],
       'expectedFromVolunteers': [this.host.expectedFromVolunteers, Validators.compose([Validators.required, Validators.minLength(150)])],
-        meats: this.formBuilder.group({
-          meatHam: this.formBuilder.control(null),
-          meatTurkey: this.formBuilder.control(null),
-          meatRoastBeef: this.formBuilder.control(null)
-        }),
-        images: imagesDisplay
+       images: imagesDisplay,
+       'isActive': [this.host.isActive]
 
     })
       console.log(this.complexForm);
@@ -157,18 +132,10 @@ private initForm() {
   showEdit(host) {
     this.host = host;
     this.changeState('edit', host.$key);
-    this.activeTitle =     host.title;
-    this.activeFeaturedImage =  host.featuredImage;
-    this.activeCountry =      host.country;
-    this.activeCity =         host.city;
-    this.activeState =        host.state;
-    this.activeImages =        host.images;
   }
-
+  
   updateHost() {
-    console.log
   var updHost = this.complexForm.value;
-  updHost.isActive = true;
   updHost.latitude = parseFloat(updHost.latitude);
   updHost.longitude = parseFloat(updHost.longitude);
     this._firebaseService.updateHost(this.host.$key, updHost);
@@ -199,39 +166,5 @@ private initForm() {
     console.log(user);
     this.host = this._firebaseService.getProfileHost(user.uid);
   }
-
-  createHost() {
-      var user = firebase.auth().currentUser;
-
-      this.newHost = {
-        uid:user.uid,
-        title:'',
-        isActive:false,
-        featuredImage:'',
-        country:'',
-        city:'',
-        state:'',
-        images:[],
-        languages:[],
-        placeDescription:'',
-        email:'',
-        benefits:'',
-        expectedFromVolunteers:'',
-        expectedWorkingTime:'',
-        latitude:null,
-        longitude:null,
-        accommodation:'',
-        skillsNeeded:[],
-        createdAt:new Date().toString()
-      }
-
-      console.log("---------------------------------------");
-      console.log("SignUpAddHost");
-      console.log(this.newHost);
-      console.log("---------------------------------------");
-
-      this._firebaseService.addHost(this.newHost);
-      console.log(this.newHost);
-    }
 
 }

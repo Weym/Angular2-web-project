@@ -6,19 +6,19 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-left">
-        <li routerLinkActive="active"><a [routerLink]="['host']">HostComponents </a></li>
+        <li routerLinkActive="active"><a [routerLink]="['hostsprotected']"><i class="fa fa-search-plus"></i> Hosts Protected</a></li>
         <li routerLinkActive="active"><a [routerLink]="['hosts']"><i class="fa fa-search" aria-hidden="true"></i>
-<span>Host List</span></a></li>
-        <li routerLinkActive="active"><a [routerLink]="['protected']">Protected</a></li>
+<span> Host List</span></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li routerLinkActive="active" *ngIf="!isAuth()"><a [routerLink]="['signup']">Sign Up</a></li>
         <li routerLinkActive="active" *ngIf="!isAuth()"><a [routerLink]="['signin']">Sign In</a></li>
         <li class="dropdown" *ngIf="isAuth()">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user"></i> User<span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
             <li><a [routerLink]="['profile']">Profile</a></li>
-            <li><a [routerLink]="['protected']">Protected</a></li>
             <li><a (click)="onLogout()" style="cursor: pointer;"><i class="fa fa-sign-out" aria-hidden="true"></i>
 <span>Logout</span></a></li>
           </ul>

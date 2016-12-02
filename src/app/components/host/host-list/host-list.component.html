@@ -1,31 +1,25 @@
-<!--
-<div class="row">
-  <div class="col-xs-12">
-    <a class="btn btn-success" [routerLink]="['new']">New Host</a>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <ul class="list-group">
-  		<pagination-controls (pageChange)="p = $event" #api></pagination-controls>
-  		<app-host-item *ngFor="let host of hosts | paginate: { itemsPerPage: 10, currentPage: p }; let i = index" [host]="host" [hostId]="host.$key"></app-host-item>
-  		<pagination-controls (pageChange)="p = $event" #api></pagination-controls>
-    </ul>
-  </div>
-</div> -->
-
 <div *ngIf="data">
 <div class="container-fluid">
     <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
         <div class="panel panel-default">
 
-            <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
+            <table class="table table-striped" [mfData]="data | dataFilter : query:'country'" #mf="mfDataTable"
                    [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                 <thead>
                 <tr>
                     <th colspan="5">
                         Filter by Country:
-                        <input class="form-control" [(ngModel)]="filterQuery"/>
+                        <div class="input-field col s12">
+                        <input class="form-control" placeholder="Search by country" [(ngModel)]="query" (keyup)=filter()/>
+                        </div>
+                        <div class="suggestions" *ngIf="filteredList.length > 0">
+                            <ul *ngFor="let item of filteredList; let i = index" >
+                                <li *ngIf="i < 6">
+                                    <a (click)="select(item)">{{item}}</a>
+                                </li>
+                            </ul>
+                        </div>  
+
                     </th>
                 </tr>
                 </thead>

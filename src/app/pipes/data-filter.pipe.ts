@@ -7,9 +7,11 @@ import * as _ from "lodash";
 })
 export class DataFilterPipe implements PipeTransform {
 
-    transform(array: any[], query: string): any {
+    transform(array: any[], query: string, otherquery:string): any {
+    	console.log(query);
+    	console.log(otherquery);
         if (query) {
-            return _.filter(array, row=>row.country.indexOf(query) > -1);
+            return _.filter(array, row=>row[otherquery].indexOf(query) > -1);
         }
         return array;
     }

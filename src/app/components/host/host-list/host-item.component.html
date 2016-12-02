@@ -12,10 +12,13 @@
 					</div>
 				</div>
 				<div class="info-bottom">
-					<div class="accommodation col-md-6">
+					<div class="accommodation col-md-3">
 						<p>{{host.accommodation}}</p>
 					</div>
-					<div class="contact col-md-6">
+					<div class="date col-md-4">
+						<p>{{host.createdAt | date:MMMM/y}}</p>
+					</div>
+					<div class="contact col-md-5">
 					  <button type="button" class="btn btn-success">Contact</button>
 					</div>
 				</div>

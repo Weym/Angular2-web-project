@@ -19,16 +19,6 @@ export class AuthService {
       });
   }
 
-  signupUser(user: UserAuth) {
-    firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-      .then((userInfo) => {
-        this.router.navigate(['/profile-user']);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
   signinUser(user: UserAuth) {
     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
       .then((userInfo) => {

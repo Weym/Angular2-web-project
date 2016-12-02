@@ -85,3 +85,13 @@ a {
     font-size: 22px;
     margin-top: 16px;
 }
+
+.date {
+    padding: 0;
+    height: 40px;
+}
+
+.date p {
+    margin: 0;
+    height: 40px;
+}

@@ -9,8 +9,12 @@ export class CountryService {
 
     getCountries() {
         return this.http.get('../resources/data/countries.json')
+
                     .toPromise()
                     .then(res => <any[]> res.json().data)
-                    .then(data => { return data; });
+                    .then(data => { 
+                    	console.log(data);
+                    	return data; 
+                    });
     }
 }
